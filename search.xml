@@ -2,12 +2,14 @@
 <search>
   <entry>
     <title><![CDATA[MobileFaceNets论文阅读笔记]]></title>
-    <url>%2F2019%2F02%2F21%2FMobileFaceNets%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%2F</url>
+    <url>%2F2018%2F05%2F02%2FMobileFaceNets%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[论文链接：https://arxiv.org/abs/1804.07573 核心改进点用 MobileNetV1, ShuffleNet, MobileNetV2等网络做人脸识别时，在embedding层之前往往采用global average pooling得到特征，但其他论文已经提出使用global average pooling后的CNN效果会比不使用global average pooling差，本文从人脸识别的角度对这个结论做了解释：假如在embedding层之前，特征的输出是7×7×512，这时7×7的范围内，角点和中心点对人脸特征的贡献是不同的，中心点对人脸特征的贡献更大。但如果使用global average pooling，则相当于把7×7个点的每个点的贡献视为均等的，这就降低了模型的特征提取能力。 如果不采用global average pooling，也可以采用全连接层，但这样会大大增加计算量，并不适合用于移动端设备。 本文对这个问题的改进方法是在embedding层之前增加depth-wise conv层，假如特征的输出是7×7×512，那么增加的depth-wise conv层的核就是7×7×512，增加的层和特征输出卷积计算就会得到1×1×512的层，可以把这个层直接做为embedding层，但在本文的标准MobileFaceNets模型中，其后增加了一个1×1的卷积层。 本文用实验结果证明，在MobileNetV2网络上，仅改变这一点，就能得到比MobileNetV2效果好的模型。后面本文在MobileNetV2的基础上设计了效果更好的MobileFaceNets系列网络。 网络模型本文的网络模型是基于MobileNetV2改进的，基本和结构和MobileNetV2几乎一样： 实验效果ArcFace loss MS-Celeb-1M database [5] with 3.8M images from 85K subjects： MobileFaceNet， LFW acc 99.55%，AgeDB Acc. 96.07%，Megaface acc 90.39, val(1e-6) 92.59 在所有的适用于移动端的网络中，效果是最好的，模型也比MobileNetV2 MobileNetV1要小。 但不考虑移动端计算能力因素，目前效果最好的人脸识别网络是iBUG_DeepInsight (ArcFace [5] LResNet100EIR)：LFW acc 99.83%， AgeDB Acc 98.08%， Megaface acc 98.06, val(1e-6) 98.48 关于MobileNetV2mobilenetV2在延续mobilenetv1的depth-wise卷积的基础上，使用了resnet的shortcut连接，但并不是直接在depth-wise卷积块的前后加上shortcut连接，mobilenetV2的bottleneck块的主要思想如下： 因为普通residual block一般是先用1×1卷积压缩通道数，然后再做卷积，再用1×1卷积扩展通道数。如果在depth-wise卷积之前像这样先压缩通道，那么效果会很差，因为depth-wise卷积依赖于较多的通道数。所以mobilenetV2使用了和普通residual block相反的策略，先扩展通道数，再做depth-wise卷积，然后压缩通道数，并称之为Inverted residuals。 bottleneck块最后，并不使用Relu来做非线性操作，而是直接输出Linear bottlenecks。这是因为在做了扩展-depth-wise卷积-压缩操作后，特征已经被压缩，这时再做Relu会破坏特征，实验证明，不做Relu能提升效果]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F02%2F21%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>论文阅读</category>
+      </categories>
+      <tags>
+        <tag>神经网络</tag>
+        <tag>人脸识别</tag>
+      </tags>
   </entry>
 </search>
