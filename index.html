@@ -384,7 +384,7 @@
       
         
           
-            <p>论文链接：<a href="https://arxiv.org/abs/1804.07573" target="_blank" rel="noopener">https://arxiv.org/abs/1804.07573</a></p>
+            <p>论文链接：<a href="https://arxiv.org/abs/1804.07573" target="_blank" rel="noopener">MobileFaceNets: Efficient CNNs for Accurate Real-Time Face Verification on Mobile Devices</a></p>
 <h2 id="核心改进点"><a href="#核心改进点" class="headerlink" title="核心改进点"></a>核心改进点</h2><p>用 MobileNetV1, ShuffleNet, MobileNetV2等网络做人脸识别时，在embedding层之前往往采用global average pooling得到特征，但其他论文已经提出使用global average pooling后的CNN效果会比不使用global average pooling差，本文从人脸识别的角度对这个结论做了解释：假如在embedding层之前，特征的输出是7×7×512，这时7×7的范围内，角点和中心点对人脸特征的贡献是不同的，中心点对人脸特征的贡献更大。但如果使用global average pooling，则相当于把7×7个点的每个点的贡献视为均等的，这就降低了模型的特征提取能力。</p>
 <p>如果不采用global average pooling，也可以采用全连接层，但这样会大大增加计算量，并不适合用于移动端设备。</p>
 <p>本文对这个问题的改进方法是在embedding层之前增加depth-wise conv层，假如特征的输出是7×7×512，那么增加的depth-wise conv层的核就是7×7×512，增加的层和特征输出卷积计算就会得到1×1×512的层，可以把这个层直接做为embedding层，但在本文的标准MobileFaceNets模型中，其后增加了一个1×1的卷积层。</p>
