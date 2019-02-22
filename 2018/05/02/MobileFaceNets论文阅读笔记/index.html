@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="论文链接：MobileFaceNets: Efficient CNNs for Accurate Real-Time Face Verification on Mobile Devices 核心改进点用 MobileNetV1, ShuffleNet, MobileNetV2等网络做人脸识别时，在embedding层之前往往采用global average pooling得到特征，但其他论文已经提">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/MobileFaceNets-1.jpg">
-<meta property="og:updated_time" content="2019-02-21T00:51:54.994Z">
+<meta property="og:updated_time" content="2019-02-22T00:47:46.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MobileFaceNets论文阅读笔记">
 <meta name="twitter:description" content="论文链接：MobileFaceNets: Efficient CNNs for Accurate Real-Time Face Verification on Mobile Devices 核心改进点用 MobileNetV1, ShuffleNet, MobileNetV2等网络做人脸识别时，在embedding层之前往往采用global average pooling得到特征，但其他论文已经提">
@@ -100,7 +100,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -407,6 +407,7 @@
       
         <p>论文链接：<a href="https://arxiv.org/abs/1804.07573" target="_blank" rel="noopener">MobileFaceNets: Efficient CNNs for Accurate Real-Time Face Verification on Mobile Devices</a></p>
 <h2 id="核心改进点"><a href="#核心改进点" class="headerlink" title="核心改进点"></a>核心改进点</h2><p>用 MobileNetV1, ShuffleNet, MobileNetV2等网络做人脸识别时，在embedding层之前往往采用global average pooling得到特征，但其他论文已经提出使用global average pooling后的CNN效果会比不使用global average pooling差，本文从人脸识别的角度对这个结论做了解释：假如在embedding层之前，特征的输出是7×7×512，这时7×7的范围内，角点和中心点对人脸特征的贡献是不同的，中心点对人脸特征的贡献更大。但如果使用global average pooling，则相当于把7×7个点的每个点的贡献视为均等的，这就降低了模型的特征提取能力。</p>
+<a id="more"></a>
 <p>如果不采用global average pooling，也可以采用全连接层，但这样会大大增加计算量，并不适合用于移动端设备。</p>
 <p>本文对这个问题的改进方法是在embedding层之前增加depth-wise conv层，假如特征的输出是7×7×512，那么增加的depth-wise conv层的核就是7×7×512，增加的层和特征输出卷积计算就会得到1×1×512的层，可以把这个层直接做为embedding层，但在本文的标准MobileFaceNets模型中，其后增加了一个1×1的卷积层。</p>
 <p>本文用实验结果证明，在MobileNetV2网络上，仅改变这一点，就能得到比MobileNetV2效果好的模型。后面本文在MobileNetV2的基础上设计了效果更好的MobileFaceNets系列网络。</p>
@@ -449,6 +450,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/22/leetcode 刷题记录-56.Merge Intervals/" rel="prev" title="leetcode 刷题记录-56.Merge Intervals">
+                leetcode 刷题记录-56.Merge Intervals <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -525,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -536,7 +553,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -547,7 +564,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -618,7 +635,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -717,6 +734,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
